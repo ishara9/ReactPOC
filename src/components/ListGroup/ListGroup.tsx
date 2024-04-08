@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./ListGroup.module.css";
 import styled from "styled-components";
+import { CiCalendarDate } from "react-icons/ci";
 
 const List = styled.ul`
   list-styles: none;
@@ -35,19 +36,20 @@ function ListGroup() {
     <>
       <h1>List</h1>
       {getMessage()}
-      <List>
+      <ul style={{ backgroundColor: "yellow" }}>
         {items.map((item, index) => (
-          <ListItem
-            active={index === selectedIndex}
+          <li
+            style={{ background: "blue" }}
             key={item}
             onClick={() => {
               setSelectedIndex(index);
             }}
           >
             {item}
-          </ListItem>
+          </li>
         ))}
-      </List>
+      </ul>
+      <CiCalendarDate color="green" size={500} />
     </>
   );
 }
