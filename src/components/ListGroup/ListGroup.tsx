@@ -1,4 +1,6 @@
 import { useState } from "react";
+import styles from "./ListGroup.module.css";
+import styled from "styled-components";
 
 function ListGroup() {
   //   const items = [];
@@ -19,7 +21,7 @@ function ListGroup() {
     <>
       <h1>List</h1>
       {getMessage()}
-      <ul className="list-group">
+      <ul className={[styles.listGroup, styles.container].join(" ")}>
         {items.map((item, index) => (
           <li
             key={item}
