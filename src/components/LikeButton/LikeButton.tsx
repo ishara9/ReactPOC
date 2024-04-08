@@ -13,9 +13,9 @@ const LikeButton = ({ onClick }: Props) => {
   };
 
   return islike ? (
-    <FaHeart size={100} color="red" onClick={toggle} />
+    <FaHeart size={20} color="red" onClick={toggle} />
   ) : (
-    <FaRegHeart size={100} color="red" onClick={toggle} />
+    <FaRegHeart size={20} color="red" onClick={toggle} />
   );
 };
 
