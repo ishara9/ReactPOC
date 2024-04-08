@@ -2,6 +2,20 @@ import { useState } from "react";
 import styles from "./ListGroup.module.css";
 import styled from "styled-components";
 
+const List = styled.ul`
+  list-styles: none;
+  padding: 0;
+`;
+
+interface ListItemProps {
+  active: boolean;
+}
+
+const ListItem = styled.li<ListItemProps>`
+  padding: 5px;
+  background: ${(props) => (props.active ? "blue" : null)};
+`;
+
 function ListGroup() {
   //   const items = [];
   let items = ["Sri Lanka", "New Zealand", "UK"];
@@ -11,7 +25,7 @@ function ListGroup() {
   // arr[0] // selected index
   // arr[1] // update function
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const getMessage = () => {
     return items.length === 0 && <p> No Items found</p>;
@@ -21,23 +35,19 @@ function ListGroup() {
     <>
       <h1>List</h1>
       {getMessage()}
-      <ul className={[styles.listGroup, styles.container].join(" ")}>
+      <List>
         {items.map((item, index) => (
-          <li
+          <ListItem
+            active={index === selectedIndex}
             key={item}
-            className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
-            }
             onClick={() => {
               setSelectedIndex(index);
             }}
           >
             {item}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 }
