@@ -1,7 +1,7 @@
 import styles from "./Button.module.css";
 
 interface Props {
-  children: string;
+  children: any;
   color?: "primary" | "secondary" | "danger";
   onClick: () => void;
   style?: React.CSSProperties;

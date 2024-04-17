@@ -1,49 +1,22 @@
-import { useState } from "react";
 import "./App.css";
-import Button from "./components/Button/Button";
+import ExpandableText from "./components/ExpandableText";
 
 function App() {
-  const [game, setGame] = useState({
-    id: 1,
-    player: {
-      name: "Player 1",
-      score: 0,
-    },
-    tags: [
-      { id: 1, name: "Sports", quanity: 10 },
-      { id: 2, name: "Run", quanity: 20 },
-    ],
-  });
-
-  function handleClick(): void {
-    setGame({
-      ...game,
-      player: {
-        ...game.player,
-        name: "Bob",
-        score: game.player.score + 1,
-      },
-      tags: game.tags.map((tag) =>
-        tag.id === 1 ? { ...tag, quanity: tag.quanity + 1 } : tag
-      ),
-    });
-  }
-
   return (
     <>
-      <h1>Player Name: {game.player.name}</h1>
-      <h2>Score: {game.player.score}</h2>
-      <h3>Tags</h3>
-      <ul>
-        {game.tags.map((tag) => (
-          <li key={tag.id}>
-            {tag.name} - {tag.quanity}
-          </li>
-        ))}
-      </ul>
-      <Button onClick={() => handleClick()}>
-        <h1>Update Score!</h1>
-      </Button>
+      <ExpandableText maxChars={20}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error adipisci
+        nam beatae illum accusantium molestias ex, dolor provident sunt quam
+        incidunt explicabo cumque eum dolorum unde obcaecati accusamus natus
+        inventore! Laboriosam corrupti quis eligendi? At in nulla, soluta quidem
+        animi quisquam architecto, aperiam, blanditiis ipsum odio eaque fuga. Ea
+        harum voluptatum expedita vero alias illum nobis quasi deleniti quo
+        eligendi. Quas saepe ratione molestias dignissimos voluptas possimus
+        ducimus esse aliquid error exercitationem, est velit. Fugit alias quas
+        dignissimos fuga dolorem in modi minima, totam impedit quos ducimus?
+        Velit, quaerat eligendi architecto quibusdam provident quis quidem fugit
+        totam vitae odio dolorem.
+      </ExpandableText>
     </>
   );
 }
