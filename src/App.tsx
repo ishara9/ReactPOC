@@ -4,6 +4,7 @@ import Button from "./components/Button/Button";
 import ListGroup from "./components/ListGroup";
 import "./App.css";
 import LikeButton from "./components/LikeButton/LikeButton";
+import Message from "./components/Message";
 
 function App() {
   const [alertVisible, setAlertVisible] = useState(false);
@@ -26,7 +27,8 @@ function App() {
           Custom Button
         </Button>
       </div> */}
-      <LikeButton onClick={() => console.log("liked")} />
+      {/* <LikeButton onClick={() => console.log("liked")} /> */}
+      <Message />
     </>
   );
 }
