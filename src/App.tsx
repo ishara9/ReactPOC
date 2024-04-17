@@ -5,10 +5,11 @@ import ListGroup from "./components/ListGroup";
 import "./App.css";
 import LikeButton from "./components/LikeButton/LikeButton";
 import Message from "./components/Message";
+import Bugs from "./components/Bugs";
 
 function App() {
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [like, setLike] = useState(false);
+  // const [alertVisible, setAlertVisible] = useState(false);
+  // const [like, setLike] = useState(false);
 
   return (
     <>
@@ -28,7 +29,8 @@ function App() {
         </Button>
       </div> */}
       {/* <LikeButton onClick={() => console.log("liked")} /> */}
-      <Message />
+      {/* <Message /> */}
+      <Bugs />
     </>
   );
 }
