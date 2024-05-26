@@ -1,10 +1,13 @@
+import ReactPDF, { PDFViewer } from "@react-pdf/renderer";
 import "./App.css";
 import ExpandableText from "./components/ExpandableText";
+import Form from "./components/Form/Form";
+import MyDocument from "./components/ReactPDF/ReactPDFTool";
 
 function App() {
   return (
     <>
-      <ExpandableText maxChars={20}>
+      {/* <ExpandableText maxChars={20}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error adipisci
         nam beatae illum accusantium molestias ex, dolor provident sunt quam
         incidunt explicabo cumque eum dolorum unde obcaecati accusamus natus
@@ -16,7 +19,11 @@ function App() {
         dignissimos fuga dolorem in modi minima, totam impedit quos ducimus?
         Velit, quaerat eligendi architecto quibusdam provident quis quidem fugit
         totam vitae odio dolorem.
-      </ExpandableText>
+      </ExpandableText> */}
+      <Form />
+      {/* <PDFViewer>
+        <MyDocument />
+      </PDFViewer> */}
     </>
   );
 }
