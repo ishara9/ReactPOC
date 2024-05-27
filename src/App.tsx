@@ -1,18 +1,15 @@
-import ReactPDF, { PDFViewer } from "@react-pdf/renderer";
-import "./App.css";
-import ExpandableText from "./components/ExpandableText";
-import Form from "./components/Form/Form";
-import MyDocument from "./components/ReactPDF/ReactPDFTool";
-import ExpenseList from "./expense-tracker/components/ExpenseList";
 import { useState } from "react";
+import "./App.css";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const [expenses, setExpenses] = useState([
-    { id: 1, description: "abc", amount: 10, category: "Util" },
-    { id: 2, description: "abcd", amount: 5, category: "Util" },
+    { id: 1, description: "abc", amount: 10, category: "Utilities" },
+    { id: 2, description: "abcd", amount: 5, category: "Utilities" },
     { id: 3, description: "abcf", amount: 201, category: "Groceries" },
     { id: 4, description: "hghgh", amount: 23, category: "Groceries" },
     { id: 5, description: "qweq", amount: 45, category: "Groceries" },
@@ -46,6 +43,17 @@ function App() {
         <MyDocument />
       </PDFViewer> */}
       <div>
+        <div className="mb-5">
+          <ExpenseForm
+            onSubmit={(expense) => {
+              console.log(expense);
+              setExpenses([
+                ...expenses,
+                { ...expense, id: expenses.length + 1 },
+              ]);
+            }}
+          />
+        </div>
         <div className="mb-3">
           <ExpenseFilter
             onSelectCategory={(category) => setSelectedCategory(category)}
