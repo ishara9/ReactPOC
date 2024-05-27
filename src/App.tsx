@@ -3,8 +3,16 @@ import "./App.css";
 import ExpandableText from "./components/ExpandableText";
 import Form from "./components/Form/Form";
 import MyDocument from "./components/ReactPDF/ReactPDFTool";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+import { useState } from "react";
 
 function App() {
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "abc", amount: 10, category: "Util" },
+    { id: 2, description: "abcd", amount: 5, category: "Util" },
+    { id: 3, description: "abcf", amount: 20, category: "Util" },
+  ]);
+
   return (
     <>
       {/* <ExpandableText maxChars={20}>
@@ -20,10 +28,16 @@ function App() {
         Velit, quaerat eligendi architecto quibusdam provident quis quidem fugit
         totam vitae odio dolorem.
       </ExpandableText> */}
-      <Form />
+      {/* <Form /> */}
       {/* <PDFViewer>
         <MyDocument />
       </PDFViewer> */}
+      <div>
+        <ExpenseList
+          expenses={expenses}
+          onDelete={(id: number) => setExpenses(expenses.filter(e=> e.id !== id))}
+        ></ExpenseList>
+      </div>
     </>
   );
 }
