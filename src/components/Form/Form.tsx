@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
   name: z.string().min(3, { message: "Name should be 3 char" }),
-  age: z.number().min(8),
+  age: z.number({ invalid_type_error: "Age iz required!" }).min(8),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -13,7 +13,7 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   console.log(errors);
 
@@ -49,7 +49,7 @@ const Form = () => {
         {errors.age && <p className="text-danger">{errors.age.message}</p>}
       </div>
 
-      <button className="btn btn-primary" type="submit">
+      <button disabled={!isValid} className="btn btn-primary" type="submit">
         Submit
       </button>
     </form>
