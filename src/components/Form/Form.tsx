@@ -1,20 +1,13 @@
 import { FormEvent, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const Form = () => {
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    // console.log("submit f2");
-    // person.name = nameRef.current?.value || "";
-    // person.age = ageRef.current ? +ageRef.current.value : 0;
-    console.log(person);
-  };
+  const { register, handleSubmit } = useForm();
 
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
-  const [person, setPerson] = useState({ name: "", age: 0 });
+  console.log(register("name"));
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit((data) => console.log(data))}>
       {/* margin bottom 3 
             div.mb-3>label.form-label+input.form-control
       */}
@@ -23,15 +16,10 @@ const Form = () => {
           Name
         </label>
         <input
-          // this will re-render alwaus input value changes
-          onChange={(event) =>
-            setPerson({ ...person, name: event.target.value })
-          }
-          ref={nameRef}
+          {...register("name")}
           id="name"
           type="text"
           className="form-control"
-          value={person.name} //value is updated at component state , not by the DOM
         />
       </div>
       <div className="mb-3">
@@ -39,14 +27,10 @@ const Form = () => {
           Age
         </label>
         <input
-          onChange={(event) =>
-            setPerson({ ...person, age: parseInt(event.target.value) })
-          }
-          ref={ageRef}
+          {...register("age")}
           id="age"
           type="number"
           className="form-control"
-          value={person.age}
         />
       </div>
 
