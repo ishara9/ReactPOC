@@ -5,13 +5,26 @@ import Form from "./components/Form/Form";
 import MyDocument from "./components/ReactPDF/ReactPDFTool";
 import ExpenseList from "./expense-tracker/components/ExpenseList";
 import { useState } from "react";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 
 function App() {
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   const [expenses, setExpenses] = useState([
     { id: 1, description: "abc", amount: 10, category: "Util" },
     { id: 2, description: "abcd", amount: 5, category: "Util" },
-    { id: 3, description: "abcf", amount: 20, category: "Util" },
+    { id: 3, description: "abcf", amount: 201, category: "Groceries" },
+    { id: 4, description: "hghgh", amount: 23, category: "Groceries" },
+    { id: 5, description: "qweq", amount: 45, category: "Groceries" },
+    { id: 6, description: "axc", amount: 77, category: "Groceries" },
+    { id: 7, description: "a123a", amount: 34, category: "Groceries" },
+    { id: 8, description: "sss", amount: 156, category: "Entertainment" },
+    { id: 9, description: "ggg", amount: 23, category: "Entertainment" },
   ]);
+
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((e) => e.category === selectedCategory)
+    : expenses;
 
   return (
     <>
@@ -33,9 +46,16 @@ function App() {
         <MyDocument />
       </PDFViewer> */}
       <div>
+        <div className="mb-3">
+          <ExpenseFilter
+            onSelectCategory={(category) => setSelectedCategory(category)}
+          />
+        </div>
         <ExpenseList
-          expenses={expenses}
-          onDelete={(id: number) => setExpenses(expenses.filter(e=> e.id !== id))}
+          expenses={visibleExpenses}
+          onDelete={(id: number) =>
+            setExpenses(expenses.filter((e) => e.id !== id))
+          }
         ></ExpenseList>
       </div>
     </>
