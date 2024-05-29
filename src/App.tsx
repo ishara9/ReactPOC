@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import userService, { User } from "./services/UserService";
-import { CanceledError } from "./services/api-client";
 import useUsers from "./hooks/useUsers";
+import userService, { User } from "./services/UserService";
 
 function App() {
   const { users, error, isLoading, setUsers, setError } = useUsers();
