@@ -1,6 +1,8 @@
-import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
+import ProductList from "./components/ProductList";
+import axios from "axios";
+import { string } from "zod";
 
 const connect = () => console.log("Connecting");
 const disConnect = () => console.log("Disconnecting");
@@ -24,22 +26,10 @@ function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await axios.get<User[]>(
-          "https://jsonplaceholder.typicode.com/user"
-        );
-        setUsers(res.data);
-        console.log(res.data);
-      } catch (err) {
-        setError((err as AxiosError).message);
-      }
-    };
-
-    fetchUsers();
-
-    // .then((res) => setUsers(res.data))
-    // .catch((err) => setError(err.message));
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data))
+      .catch((err) => setError(err.message));
   }, []);
 
   return (
