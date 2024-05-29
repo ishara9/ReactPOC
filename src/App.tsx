@@ -23,19 +23,23 @@ function App() {
 
   const [users, setUsers] = useState<User[]>([]);
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
     axios
       .get<User[]>("https://jsonplaceholder.typicode.com/users")
-      .then((res) => setUsers(res.data));
+      .then((res) => setUsers(res.data))
+      .catch((err) => setError(err.message));
   }, []);
 
   return (
     <>
-      {users.map((user) => (
-        <li key={user.id}>
-          {user.id} {user.name}
-        </li>
-      ))}
+      {error && <p className="text-danger">{error}</p>}
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
 
       {/* <ExpandableText maxChars={20}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error adipisci
