@@ -1,30 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
-import ExpenseForm from "./expense-tracker/components/ExpenseForm";
-import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ProductList from "./components/ProductList";
+import axios from "axios";
+import { string } from "zod";
+
+const connect = () => console.log("Connecting");
+const disConnect = () => console.log("Disconnecting");
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [category, setCategory] = useState("");
+  // useEffect(() => {
+  //   connect();
 
-  const [expenses, setExpenses] = useState([
-    { id: 1, description: "abc", amount: 10, category: "Utilities" },
-    { id: 2, description: "abcd", amount: 5, category: "Utilities" },
-    { id: 3, description: "abcf", amount: 201, category: "Groceries" },
-    { id: 4, description: "hghgh", amount: 23, category: "Groceries" },
-    { id: 5, description: "qweq", amount: 45, category: "Groceries" },
-    { id: 6, description: "axc", amount: 77, category: "Groceries" },
-    { id: 7, description: "a123a", amount: 34, category: "Groceries" },
-    { id: 8, description: "sss", amount: 156, category: "Entertainment" },
-    { id: 9, description: "ggg", amount: 23, category: "Entertainment" },
-  ]);
+  //   // Following will be executed when react unmounting the component, in dev mode we can see 2 connecting and 1 disconnect
+  //   return () => disConnect();
+  // });
 
-  const visibleExpenses = selectedCategory
-    ? expenses.filter((e) => e.category === selectedCategory)
-    : expenses;
+  interface User {
+    id: number;
+    name: string;
+  }
+
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data));
+  }, []);
 
   return (
     <>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+
       {/* <ExpandableText maxChars={20}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error adipisci
         nam beatae illum accusantium molestias ex, dolor provident sunt quam
@@ -42,7 +52,21 @@ function App() {
       {/* <PDFViewer>
         <MyDocument />
       </PDFViewer> */}
-      <div>
+      {/* <FocusInput /> */}
+
+      {/* <div className="mb-3">
+        <select
+          className="form-select"
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option value=""></option>
+          <option value="Cloathing">Cloathing</option>
+          <option value="Household">Household</option>
+        </select>
+        <ProductList category={category} />
+      </div> */}
+
+      {/* <div>
         <div className="mb-5">
           <ExpenseForm
             onSubmit={(expense) => {
@@ -65,7 +89,7 @@ function App() {
             setExpenses(expenses.filter((e) => e.id !== id))
           }
         ></ExpenseList>
-      </div>
+      </div> */}
     </>
   );
 }
